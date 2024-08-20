@@ -3,6 +3,20 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@warn/messaging": [
+        "./dist/warn/messaging"
+      ],
+      "@warn/template-messaging": [
+        "./dist/warn/template-messaging"
+      ],
+      "@warn/time-messaging": [
+        "./dist/warn/time-messaging"
+      ],
+      "@warn/util": [
+        "./dist/warn/util"
+      ]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

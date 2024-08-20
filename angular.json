@@ -3,5 +3,168 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ng-build-warn": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/ng-build-warn",
+      "sourceRoot": "projects/ng-build-warn/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-browser:esbuild",
+          "options": {
+            "outputPath": "dist/ng-build-warn",
+            "index": "projects/ng-build-warn/src/index.html",
+            "browser": "projects/ng-build-warn/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/ng-build-warn/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/ng-build-warn/public"
+              }
+            ],
+            "styles": [
+              "projects/ng-build-warn/src/styles.css"
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": ["lodash/fp/template"]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ng-build-warn:build:production"
+            },
+            "development": {
+              "buildTarget": "ng-build-warn:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        }
+      }
+    },
+    "@warn/time-messaging": {
+      "projectType": "library",
+      "root": "projects/warn/time-messaging",
+      "sourceRoot": "projects/warn/time-messaging/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/warn/time-messaging/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/warn/time-messaging/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/warn/time-messaging/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/warn/time-messaging/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "@warn/util": {
+      "projectType": "library",
+      "root": "projects/warn/util",
+      "sourceRoot": "projects/warn/util/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/warn/util/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/warn/util/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/warn/util/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/warn/util/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
   }
 }
